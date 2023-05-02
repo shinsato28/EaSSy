@@ -15,7 +15,9 @@
 * 自分の興味のあるジャンルの文章を探したいとき
 
 ## 設計書
-
+* [ER図](https://drive.google.com/file/d/1IaEW-RsCOYA93y7gg2CnpXPuSAwoIpTb/view?usp=sharing)
+* [テーブル定義書](https://docs.google.com/spreadsheets/d/1xvTY9DCxNbzlPi2tpuBiCwxHih9phiMiHV4eKUgVueQ/edit?usp=sharing)
+* [詳細設計書](https://docs.google.com/spreadsheets/d/1CG3CaMKw5tYNfdiCVpkpIIejfpluBmR6ajt7P4ceLFI/edit?usp=sharing)
 
 ## 開発環境
 - OS：Linux(CentOS)
