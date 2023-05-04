@@ -20,10 +20,12 @@ class Public::SessionsController < Devise::SessionsController
   # end
 
   def after_sign_in_path_for(resource)
+    flash[:notice] = "ログインに成功しました。"
     user_path(current_user)
   end
 
   def after_sign_out_path_for(resource)
+    flash[:notice] = "ログアウトに成功しました。"
     root_path
   end
 
@@ -33,6 +35,10 @@ class Public::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up)
+  end
 
   # ログインしようとしたユーザーが退会済みなら新規登録画面へ遷移させる
   def user_state
