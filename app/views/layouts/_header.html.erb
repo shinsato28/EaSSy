@@ -23,6 +23,11 @@
         <ul class="navbar-nav">
           <% if admin_signed_in? %>
             <li class="nav-link px-2">
+              <%= link_to admin_users_path, class: "text-decoration-none text-dark h5" do %>
+                <i class="fas fa-users"></i>登録ユーザー
+              <% end %>
+            </li>
+            <li class="nav-link px-2">
               <%= link_to destroy_admin_session_path, method: :delete, class: "text-decoration-none text-dark h5" do %>
                 <i class="fas fa-sign-out-alt"></i>ログアウト
               <% end %>

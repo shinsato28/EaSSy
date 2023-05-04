@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
     resources :users,only: [:index, :show, :edit, :update]
     resources :novels,only: [:index, :edit, :update] do
-      resources :novel_comments,only: [:edit, :update]
+      resources :novel_comments,only: [:index, :edit, :update]
     end
   end
 
@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
     resources :novels,only: [:index, :show, :new, :create, :edit, :update] do
       resource :favorites, only: [:create, :destroy]
-      resources :novel_comments,only: [:create, :edit, :update, :destroy]
+      resources :novel_comments,only: [:index, :create, :edit, :update, :destroy]
     end
     get "novels/confirm" => "novels#confirm"
   end
