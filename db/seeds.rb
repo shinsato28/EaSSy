@@ -11,7 +11,7 @@ Admin.create!(
 )
 
 3.times do |n|
-    Customer.create!(
+    User.create!(
       email: "test#{n + 1}@gmail.com",
       password: "111111",
       name: "test#{n + 1}",
