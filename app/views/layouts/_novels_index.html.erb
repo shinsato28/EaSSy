@@ -1,0 +1,25 @@
+<% novels.each do |novel| %>
+  <div class="card mb-1">
+    <div class="card-body">
+      <h5 class="card-title"><%= link_to novel.title, novel_path(novel) %></h5>
+      <h6 class="card-subtitle mb-2 text-muted">
+        <% novel.tags.each do |tag| %>
+          <span style="list-style: none;"><%= tag.name %> </span>
+        <% end %>
+      </h6>
+      <p class="card-text">投稿者: <%= link_to user.name, user_path(user) %></p>
+      <% if novel.is_unpublished == false %>
+        <p class="card-text text-success">ステータス: 公開中</p>
+      <% else %>
+        <p class="card-text text-danger">ステータス: 非公開</p>
+      <% end %>
+      <% if @user.id == current_user.id %>
+        <div class="text-right">
+          <%= link_to edit_novel_path(novel) do %>
+            <button class="btn btn-success" type="submit">編集する</button>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

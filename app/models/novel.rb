@@ -5,7 +5,8 @@ class Novel < ApplicationRecord
   has_many :tags, through: :tag_maps
   belongs_to :user
 
-  validates :title,length:{maximum:50}
+  validates :title,length:{maximum:50},presence:true
+  validates :body,presence:true
 
 
   # メソッド
@@ -21,11 +22,11 @@ class Novel < ApplicationRecord
     new_tags = tags - current_tags
 
     old_tags.each do |old_name|
-      self.tags.delete Tag.find_by(name: old_name)
+      self.tags.delete Tag.find_by(name:old_name)
     end
 
     new_tags.each do |new_name|
-      post_tag = Tag.find_or_create_by(name: new_name)
+      post_tag = Tag.find_or_create_by(name:new_name)
       self.tags << post_tag
     end
   end

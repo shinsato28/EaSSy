@@ -1,2 +1,31 @@
-<h1>Public::Novels#new</h1>
-<p>Find me in app/views/public/novels/new.html.erb</p>
+<div class="container mt-2">
+  <div class="row d-flex justify-content-center mb-5">
+    <div class="col-10">
+      <%= render 'layouts/error', obj: @novel %>
+      <h3 class="mb-4">新規投稿</h3>
+
+      <%= form_with model: @novel, url: confirm_novels_path do |f| %>
+        <div class="form-group mb-3">
+          <%= f.label :title, "タイトル" %>
+          <%= f.text_field :title, placeholder: "タイトルを入力してください", class: "form-control" %>
+        </div>
+
+        <div class="form-group mb-5">
+          <%= f.label :body, "本文" %>
+          <%= f.text_area :body, placeholder: "本文を入力してください", class: 'form-control', style: "height: 1000px;" %>
+        </div>
+
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <%= link_to novels_path, class: 'text-light' do %>
+              <button class="btn btn-danger" type="submit">キャンセル</button>
+            <% end %>
+          </div>
+          <div class="btn-group ml-auto">
+            <%= f.submit "確認画面に進む", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

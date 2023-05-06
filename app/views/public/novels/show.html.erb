@@ -1,2 +1,15 @@
-<h1>Public::Novels#show</h1>
-<p>Find me in app/views/public/novels/show.html.erb</p>
+<div class="container mt-2">
+  <div class="row d-flex justify-content-center mb-5">
+    <div class="col-10">
+      <%= form_with model: @novel do |f| %>
+        <h2 class="mb-2"><%= @novel.title %></h2>
+        <div class="mb-3 border-bottom">
+          <% @novel.tags.each do |tag| %>
+            <span><%= tag.name %> </span>
+          <% end %>
+        </div>
+        <div class="contents-area mb-5"><%=safe_join(@novel.body.split("\n"),tag(:br))%></div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -37,9 +37,9 @@ Rails.application.routes.draw do
     end
 
     resources :novels,only: [:index, :show, :new, :create, :edit, :update] do
+      post :confirm, on: :collection
       resource :favorites, only: [:create, :destroy]
       resources :novel_comments,only: [:index, :create, :edit, :update, :destroy]
     end
-    get "novels/confirm" => "novels#confirm"
   end
 end
