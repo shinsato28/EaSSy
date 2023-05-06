@@ -1,2 +1,49 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="container mt-2">
+  <div class="row d-flex justify-content-center">
+    <div class="col-8">
+      <h3 class="text-center mt-3"><%= @user.name %>の詳細</h3>
+
+      <table class="table table-hover table-bordered">
+        <tbody>
+          <tr>
+            <th class="column-table-head">ID</th>
+            <td><%= @user.id %></td>
+          </tr>
+          <tr>
+            <th class="column-table-head">名前</th>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <th class="column-table-head">メールアドレス</th>
+            <td><%= @user.email %></td>
+          </tr>
+          <tr>
+            <th class="column-table-head">投稿数</th>
+            <td><%= @novels.count %></td>
+          </tr>
+          <tr>
+            <th class="column-table-head">削除された投稿数</th>
+            <td><%= @deleted_novels.count %></td>
+          </tr>
+          <tr>
+            <th class="column-table-head">ステータス</th>
+            <% if @user.is_deleted == false %>
+              <td class="text-success">有効</td>
+            <% else %>
+              <td class="text-danger">退会</td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="d-grid gap-2 d-md-block">
+        <%= link_to admin_users_path, class: 'text-light' do %>
+          <button class="btn btn-primary" type="submit">戻る</button>
+        <% end %>
+        <%= link_to edit_admin_user_path(@user), class: 'text-light' do %>
+          <button class="btn btn-success" type="submit">編集する</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

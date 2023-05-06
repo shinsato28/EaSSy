@@ -1,2 +1,42 @@
-<h1>Admin::Users#edit</h1>
-<p>Find me in app/views/admin/users/edit.html.erb</p>
+<div class="container mt-2">
+  <div class="row d-flex justify-content-center">
+    <div class="col-8">
+      <h3 class="text-center mt-3"><%= @user.name %>の編集</h3>
+
+      <%= form_with model: @user, url:admin_user_path, method: :patch do |f| %>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th class="column-table-head">ID</th>
+            <td><%= @user.id %></td>
+          </tr>
+          <tr>
+            <th class="column-table-head"><%= f.label "名前" %></th>
+            <td><%= f.text_field :name, class: "form-control" %></td>
+          </tr>
+          <tr>
+            <th class="column-table-head"><%= f.label "メールアドレス" %></th>
+            <td><%= f.text_field :email, class: "form-control" %></td>
+          </tr>
+          <tr>
+            <th class="column-table-head">ステータス</th>
+            <td>
+              <%= f.radio_button :is_deleted, false %>
+              <%= f.label :is_deleted, '有効', class: "mr-2" %>
+              <%= f.radio_button :is_deleted, true %>
+              <%= f.label :is_deleted, '退会' %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="d-grid gap-2 d-md-block">
+        <%= link_to :back, class: 'text-light' do %>
+          <button class="btn btn-primary" type="submit">戻る</button>
+        <% end %>
+        <%= f.submit "変更を保存", class:"  btn btn-success" %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>

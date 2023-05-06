@@ -7,6 +7,8 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @novels = @user.novels
+    @deleted_novels = @novels.where(is_deleted: true)
   end
 
   def edit
@@ -15,6 +17,12 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    if @user.update(user_params)
+      flash[:notice] = "ユーザー情報の編集に成功しました。"
+      redirect_to admin_user_path(@user.id)
+    else
+      render :edit
+    end
   end
 
   private
