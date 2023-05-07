@@ -14,6 +14,9 @@ class Novel < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 
+  scope :most_favorite, -> { left_joins(:favorites).select(:id, "COUNT(favorites.id) AS favorites_count").group(:id) }
+  scope :latest, -> {order(created_at: :desc)}
+
   def save_posts(tags)
     # 付けられたタグを取得
     current_tags = self.tags.pluck(:name) unless self.tags.nil?

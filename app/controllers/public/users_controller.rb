@@ -9,7 +9,7 @@ class Public::UsersController < ApplicationController
 
   def novels_index
     @user = User.find(params[:id])
-    @novels = @user.novels
+    @novels = @user.novels.where(is_unpublished: false).order(created_at: :desc)
   end
 
   def edit
@@ -34,6 +34,12 @@ class Public::UsersController < ApplicationController
   end
 
   def unsubscribe
+  end
+
+  def favorites_index
+    @user = User.find(params[:id])
+    likes = Favorite.where(user_id: @user.id).pluck(:novel_id)
+    @like_novels = Novel.find(likes)
   end
 
   private

@@ -17,6 +17,9 @@
             <th class="column-table-head">投稿数</th>
             <td><%= link_to @novels.count, novels_index_user_path(@user) %></td>
           </tr>
+            <th class="column-table-head">いいねした投稿</th>
+            <td><%= link_to "いいね一覧", favorites_index_user_path(@user) %></td>
+          </tr>
           <tr>
             <th class="column-table-head">ステータス</th>
             <% if @user.is_deleted == false %>
