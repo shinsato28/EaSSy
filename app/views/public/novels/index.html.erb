@@ -20,7 +20,11 @@
               <span class="mr-5 favorite-btn">
                 <%= render "public/favorites/favorites-btn", novel: novel %>
               </span>
-              <span class="mr-5">コメント数: </span>
+              <span class="mr-5">
+                <%= link_to novel_novel_comments_path(novel), class: "text-decoration-none text-dark h5" do %>
+                  <i class="fas fa-comment-dots"></i> <%= novel.novel_comments.count %>
+                <% end %>
+              </span>
               <span>投稿日: <%= l novel.created_at %></span>
             </div>
             <p class="card-text text-right">投稿者: <%= link_to novel.user.name, user_path(novel.user) %></p>

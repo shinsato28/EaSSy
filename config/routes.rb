@@ -39,7 +39,7 @@ Rails.application.routes.draw do
       get "favorites_index", on: :member
     end
 
-    resources :novels,only: [:index, :show, :new, :create, :edit, :update] do
+    resources :novels,only: [:index, :show, :new, :create, :edit, :update, :destroy] do
       post :confirm, on: :collection
       resource :favorites, only: [:create, :destroy]
       resources :novel_comments,only: [:index, :create, :edit, :update, :destroy]
