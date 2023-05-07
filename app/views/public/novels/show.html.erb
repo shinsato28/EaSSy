@@ -9,6 +9,12 @@
           <% end %>
         </div>
         <div class="contents-area mb-5"><%=safe_join(@novel.body.split("\n"),tag(:br))%></div>
+
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <%= f.submit "戻る", name: :back, class: "btn btn-primary" %>
+          </div>
+        </div>
       <% end %>
     </div>
   </div>

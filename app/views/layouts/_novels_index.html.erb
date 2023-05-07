@@ -10,13 +10,14 @@
             <span style="list-style: none;"><%= tag.name %> </span>
           <% end %>
         </h6>
-        <p class="card-text">投稿者: <%= link_to user.name, user_path(user) %></p>
-        <% if novel.is_unpublished == false %>
-          <p class="card-text text-success">ステータス: 公開中</p>
-        <% else %>
-          <p class="card-text text-danger">ステータス: 非公開</p>
-        <% end %>
-        <% if @user.id == current_user.id %>
+        <p class="card-text">投稿者: <%= link_to novel.user.name, user_path(novel.user) %></p>
+        <p class="card-text">投稿日: <%= l novel.created_at %></p>
+        <% if novel.user.id == current_user.id %>
+          <% if novel.is_unpublished == false %>
+            <p class="card-text text-success">ステータス: 公開中</p>
+          <% else %>
+            <p class="card-text text-danger">ステータス: 非公開</p>
+          <% end %>
           <div class="text-right">
             <%= link_to edit_novel_path(novel) do %>
               <button class="btn btn-success" type="submit">編集する</button>

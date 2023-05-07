@@ -3,7 +3,13 @@ class Public::NovelsController < ApplicationController
   before_action :ensure_guest_user, only: [:new]
 
   def index
-    @novels = Novel.where(is_unpublished: false, is_deleted: false)
+    if params[:most_favorite]
+      @novels = Novel.most_favorite.order("favorites_count DESC").select("novels.*")
+    elsif params[:latest]
+      @novels = Novel.latest
+    else
+      @novels = Novel.where(is_unpublished: false, is_deleted: false).order(created_at: :desc)
+    end
   end
 
   def show

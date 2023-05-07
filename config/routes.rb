@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       patch 'withdraw', on: :collection
       get 'unsubscribe', on: :collection
       get "novels_index", on: :member
+      get "favorites_index", on: :member
     end
 
     resources :novels,only: [:index, :show, :new, :create, :edit, :update] do

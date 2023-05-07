@@ -1,9 +1,14 @@
 <div class="container mt-2">
   <div class="row d-flex justify-content-center">
     <div class="col-8">
-      <h3 class="mt-3">投稿された小説</h3>
+      <h3 class="mt-3 mb-3">投稿された小説</h3>
+      <p>
+        <%= link_to 'いいねが多い順', novels_path(most_favorite: "true") %>
+        <span>|</span>
+        <%= link_to '新着順', novels_path(latest: "true") %>
+      </p>
       <% @novels.each do |novel| %>
-        <div class="card mb-1">
+        <div class="card mb-1", id="novel_<%= novel.id %>">
           <div class="card-body">
             <h5 class="card-title"><%= link_to novel.title, novel_path(novel) %></h5>
             <h6 class="card-subtitle mb-2 text-muted">
@@ -12,8 +17,11 @@
               <% end %>
             </h6>
             <div>
-              <span class="mr-5">いいね: </span>
-              <span>コメント数: </span>
+              <span class="mr-5 favorite-btn">
+                <%= render "public/favorites/favorites-btn", novel: novel %>
+              </span>
+              <span class="mr-5">コメント数: </span>
+              <span>投稿日: <%= l novel.created_at %></span>
             </div>
             <p class="card-text text-right">投稿者: <%= link_to novel.user.name, user_path(novel.user) %></p>
           </div>
