@@ -1,5 +1,6 @@
 class Public::NovelsController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :ensure_guest_user, only: [:new]
 
   def index
     @novels = Novel.where(is_unpublished: false, is_deleted: false)
@@ -55,6 +56,13 @@ class Public::NovelsController < ApplicationController
   private
     def novel_params
       params.require(:novel).permit(:title, :body, :is_unpublished, :is_deleted)
+    end
+
+    def ensure_guest_user
+      @user = current_user
+      if current_user.name == "guestuser"
+        redirect_to user_path(current_user) , notice: 'ゲストユーザーは新規投稿画面へ遷移できません。'
+      end
     end
 
     def is_matching_login_user
