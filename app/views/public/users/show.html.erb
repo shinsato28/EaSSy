@@ -29,10 +29,10 @@
       </table>
 
       <div class="d-grid gap-2 d-md-block">
-        <%= link_to admin_users_path, class: 'text-light' do %>
+        <%= link_to :back, class: 'text-light' do %>
           <button class="btn btn-primary" type="submit">戻る</button>
         <% end %>
-        <% if @user.id == current_user.id %>
+        <% if @user.id == current_user.id && @user.name != "guestuser" %>
           <%= link_to edit_user_path(@user), class: 'text-light' do %>
             <button class="btn btn-success" type="submit">編集する</button>
           <% end %>

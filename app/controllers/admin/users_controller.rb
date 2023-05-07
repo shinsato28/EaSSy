@@ -5,6 +5,11 @@ class Admin::UsersController < ApplicationController
     @users = User.all
   end
 
+  def novels_index
+    @user = User.find(params[:id])
+    @novels = @user.novels
+  end
+
   def show
     @user = User.find(params[:id])
     @novels = @user.novels

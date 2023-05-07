@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'homes/top', as: "top"
 
-    resources :users,only: [:index, :show, :edit, :update]
-    resources :novels,only: [:index, :edit, :update] do
+    resources :users,only: [:index, :show, :edit, :update] do
+      get "novels_index", on: :member
+    end
+    resources :novels,only: [:edit, :update] do
       resources :novel_comments,only: [:index, :edit, :update]
     end
   end
@@ -37,9 +39,9 @@ Rails.application.routes.draw do
     end
 
     resources :novels,only: [:index, :show, :new, :create, :edit, :update] do
+      post :confirm, on: :collection
       resource :favorites, only: [:create, :destroy]
       resources :novel_comments,only: [:index, :create, :edit, :update, :destroy]
     end
-    get "novels/confirm" => "novels#confirm"
   end
 end
