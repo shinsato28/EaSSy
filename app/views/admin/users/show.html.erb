@@ -19,7 +19,7 @@
           </tr>
           <tr>
             <th class="column-table-head">投稿数</th>
-            <td><%= @novels.count %></td>
+            <td><%= link_to @novels.count, novels_index_admin_user_path(@user) %></td>
           </tr>
           <tr>
             <th class="column-table-head">削除された投稿数</th>
