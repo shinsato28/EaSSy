@@ -74,7 +74,7 @@ class Public::NovelsController < ApplicationController
     def is_matching_login_user
       novel = Novel.find(params[:id])
       user = novel.user
-      unless user.id == current_user.id
+      unless user.id == current_user&.id || !admin_signed_in?
         redirect_to novels_path
       end
     end

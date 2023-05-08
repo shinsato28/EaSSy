@@ -7,26 +7,8 @@
         <span>|</span>
         <%= link_to '新着順', novels_path(latest: "true") %>
       </p>
-      <% @novels.each do |novel| %>
-        <div class="card mb-1", id="novel_<%= novel.id %>">
-          <div class="card-body">
-            <h5 class="card-title"><%= link_to novel.title, novel_path(novel) %></h5>
-            <h6 class="card-subtitle mb-2 text-muted">
-              <% novel.tags.each do |tag| %>
-                <span><%= tag.name %> </span>
-              <% end %>
-            </h6>
-            <div>
-              <span class="mr-5 favorite-btn">
-                <%= render "public/favorites/favorites-btn", novel: novel %>
-              </span>
-              <span class="mr-5">コメント数: </span>
-              <span>投稿日: <%= l novel.created_at %></span>
-            </div>
-            <p class="card-text text-right">投稿者: <%= link_to novel.user.name, user_path(novel.user) %></p>
-          </div>
-        </div>
-      <% end %>
+      <%= render 'layouts/novels_index', novels: @novels, user: @user %>
     </div>
   </div>
 </div>
+

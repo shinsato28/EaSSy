@@ -1,6 +1,6 @@
 class Novel < ApplicationRecord
   has_many :favorites, dependent: :destroy
-  has_many :book_comments, dependent: :destroy
+  has_many :novel_comments, dependent: :destroy
   has_many :tag_maps, dependent: :destroy
   has_many :tags, through: :tag_maps
   belongs_to :user
@@ -11,7 +11,7 @@ class Novel < ApplicationRecord
 
   # メソッド
   def favorited_by?(user)
-    favorites.exists?(user_id: user.id)
+    favorites.exists?(user_id: user&.id)
   end
 
   scope :most_favorite, -> { left_joins(:favorites).select(:id, "COUNT(favorites.id) AS favorites_count").group(:id) }
