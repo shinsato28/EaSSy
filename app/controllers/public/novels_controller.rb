@@ -35,6 +35,8 @@ class Public::NovelsController < ApplicationController
     if params[:back] || !@novel.save
       render :new and return
       @novel = Novel.new(novel_params)
+    elsif tag_name_no_duplicate(tag_list) == false
+      render :confirm
     elsif @novel.save
       @novel.save_posts(tag_list)
       flash[:notice]="投稿に成功しました。"
@@ -49,8 +51,13 @@ class Public::NovelsController < ApplicationController
 
   def update
     @novel = Novel.find(params[:id])
+
+    # 付けられたタグを配列として取得する。
     tag_list = params[:novel][:tag_name].delete(' ').delete('　').split(',')
-    if @novel.update(novel_params)
+
+    # updateの条件を満たすかつタグ名の重複がない場合、変更する。
+    # 重複の判断にはtag_name_duplicate?メソッドを使用。メソッドの詳細は下記
+    if @novel.update(novel_params) && tag_name_no_duplicate(tag_list)
       @novel.save_posts(tag_list)
       flash[:notice] = "変更内容を保存しました。"
       redirect_to novel_path(@novel)
@@ -62,6 +69,19 @@ class Public::NovelsController < ApplicationController
   private
     def novel_params
       params.require(:novel).permit(:title, :body, :is_unpublished, :is_deleted)
+    end
+
+    # タグの保存、更新をする際に使用する。
+    # tag_listの要素をeachで取り出し、重複するものがあればfalseを返す。
+    def tag_name_no_duplicate(tag_list)
+      result = (tag_list.count - tag_list.uniq.count) == 0
+      if result == false
+        @tag_list = @novel.tags.pluck(:name).join(',')
+        flash[:notice] = "同じタグ名を複数付けることはできません。"
+        return false
+      else
+        return true
+      end
     end
 
     def ensure_guest_user

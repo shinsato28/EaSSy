@@ -1,0 +1,13 @@
+<div class="container mt-2">
+  <div class="row d-flex justify-content-center">
+    <div class="col-8 mb-5">
+      <% if @model == 'tag' %>
+      	<h3 class="mb-5">タグ: "<%= @content %> の検索結果"</h3>
+        <%= render 'layouts/novels_index', novels: @records %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
