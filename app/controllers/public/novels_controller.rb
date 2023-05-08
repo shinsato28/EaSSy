@@ -35,6 +35,7 @@ class Public::NovelsController < ApplicationController
     if params[:back] || !@novel.save
       render :new and return
       @novel = Novel.new(novel_params)
+    # tag_name_no_duplicateメソッドを使用して重複するタグ名があれば戻す。メソッドの詳細は下記
     elsif tag_name_no_duplicate(tag_list) == false
       render :confirm
     elsif @novel.save
@@ -56,7 +57,7 @@ class Public::NovelsController < ApplicationController
     tag_list = params[:novel][:tag_name].delete(' ').delete('　').split(',')
 
     # updateの条件を満たすかつタグ名の重複がない場合、変更する。
-    # 重複の判断にはtag_name_duplicate?メソッドを使用。メソッドの詳細は下記
+    # 重複の判断にはtag_name_no_duplicateメソッドを使用。メソッドの詳細は下記
     if @novel.update(novel_params) && tag_name_no_duplicate(tag_list)
       @novel.save_posts(tag_list)
       flash[:notice] = "変更内容を保存しました。"
@@ -72,7 +73,7 @@ class Public::NovelsController < ApplicationController
     end
 
     # タグの保存、更新をする際に使用する。
-    # tag_listの要素をeachで取り出し、重複するものがあればfalseを返す。
+    # .uniq.countで一意な要素の数を取得し、全体の数から引いた数が0でないときfalseを返す。
     def tag_name_no_duplicate(tag_list)
       result = (tag_list.count - tag_list.uniq.count) == 0
       if result == false
