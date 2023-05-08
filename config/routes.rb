@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       get "novels_index", on: :member
     end
     resources :novels,only: [:edit, :update] do
-      resources :novel_comments,only: [:index, :edit, :update]
+      resources :novel_comments,only: [:index, :edit, :update, :destroy]
     end
   end
 
