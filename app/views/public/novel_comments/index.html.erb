@@ -1,7 +1,16 @@
-<div class="container mt-2">
+<div class="container mt-2 mb-5">
   <div class="row d-flex justify-content-center">
     <div class="col-8">
       <h3 class="mt-3 mb-3 border-bottom"><%= link_to @novel.title, novel_path(@novel) %></h3>
+
+      <% if current_user.name != "guestuser" %>
+        <div class="mt-5 mb-3 text-right">
+          <%= form_with(model:[@novel, @new_comment], local: false) do |f| %>
+            <%= f.text_area :comment, rows:'3',placeholder: "コメントを入力してください", class: "w-100 comment-textarea" %>
+            <%= f.submit "送信する", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      <% end %>
 
       <% @comments.each do |comment| %>
         <div class="card mb-1">
@@ -18,15 +27,6 @@
               </div>
             <% end %>
           </div>
-        </div>
-      <% end %>
-
-      <% if current_user.name != "guestuser" %>
-        <div class="mt-5 text-right">
-          <%= form_with(model:[@novel, @new_comment], local: false) do |f| %>
-            <%= f.text_area :comment, rows:'3',placeholder: "コメントを入力してください", class: "w-100 comment-textarea" %>
-            <%= f.submit "送信する", class: "btn btn-primary" %>
-          <% end %>
         </div>
       <% end %>
     </div>

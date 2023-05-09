@@ -3,6 +3,7 @@ class Public::NovelsController < ApplicationController
   before_action :ensure_guest_user, only: [:new]
 
   def index
+    # @q = Novel.ransack(params[:q])
     if params[:most_favorite]
       @novels = Novel.most_favorite.order("favorites_count DESC").select("novels.*")
     elsif params[:latest]
@@ -37,7 +38,7 @@ class Public::NovelsController < ApplicationController
       @novel = Novel.new(novel_params)
     # tag_name_no_duplicateメソッドを使用して重複するタグ名があれば戻す。メソッドの詳細は下記
     elsif tag_name_no_duplicate(tag_list) == false
-      render :confirm
+      render :confirm and return
     elsif @novel.save
       @novel.save_posts(tag_list)
       flash[:notice]="投稿に成功しました。"
@@ -75,7 +76,7 @@ class Public::NovelsController < ApplicationController
     # タグの保存、更新をする際に使用する。
     # .uniq.countで一意な要素の数を取得し、全体の数から引いた数が0でないときfalseを返す。
     def tag_name_no_duplicate(tag_list)
-      result = (tag_list.count - tag_list.uniq.count) == 0
+      result = tag_list.count == tag_list.uniq.count
       if result == false
         @tag_list = @novel.tags.pluck(:name).join(',')
         flash[:notice] = "同じタグ名を複数付けることはできません。"
