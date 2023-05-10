@@ -1,84 +1,89 @@
-<div class="container">
-  <nav class="navbar navbar-expand-lg">
-    <div class="collapse navbar-collapse">
-      <div class="d-flex flex-row">
-        <% if admin_signed_in? %>
-          <%= link_to image_tag("logo.png"), admin_top_path, class: 'mr-3' %>
-        <% else %>
-          <%= link_to image_tag("logo.png"), root_path, class: 'mr-3' %>
-        <% end %>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container">
+    <!--管理者がログインしているときは管理者のトップページに遷移するようにする-->
+    <% if admin_signed_in? %>
+      <%= link_to image_tag("logo.png"), admin_top_path, class: 'mr-3' %>
+    <% else %>
+      <%= link_to image_tag("logo.png"), root_path, class: 'mr-3' %>
+    <% end %>
 
-        <div class="user-name text-dark pt-4">
-          <% if user_signed_in? %>
-            <p class="">ようこそ、<span class="h5"><strong><%= current_user.name %></strong></span> 様</p>
-          <% elsif admin_signed_in? %>
-            <p class="h5"><strong>管理者ログイン中</strong></p>
-          <% else %>
-            <p class=""><span class="h5"><strong>非ログイン</strong></span></p>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="d-flex flex-row ml-auto">
-        <ul class="navbar-nav">
-          <% if admin_signed_in? %>
-            <li class="nav-link px-2">
-              <%= link_to admin_users_path, class: "text-decoration-none text-dark h5" do %>
-                <i class="fas fa-users"></i>登録ユーザー
-              <% end %>
-            </li>
-            <li class="nav-link px-2">
-              <%= link_to destroy_admin_session_path, method: :delete, class: "text-decoration-none text-dark h5" do %>
-                <i class="fas fa-sign-out-alt"></i>ログアウト
-              <% end %>
-            </li>
-
-          <% elsif user_signed_in? %>
-            <li class="nav-link px-2">
-              <%= link_to user_path(current_user), class: "text-decoration-none text-dark h5" do %>
-                <i class="fas fa-user"></i> マイページ
-              <% end %>
-            </li>
-            <li class="nav-link px-2">
-              <%= link_to novels_path, class: "text-decoration-none text-dark h5" do %>
-                <i class="fas fa-book"></i> 小説一覧
-              <% end %>
-            </li>
-            <% if current_user.name != "guestuser" %>
-              <li class="nav-link px-2">
-                <%= link_to new_novel_path, class: "text-decoration-none text-dark h5" do %>
-                  <i class="fas fa-plus-square"></i> 新規投稿
-                <% end %>
-              </li>
-            <% end %>
-            <li class="nav-link px-2">
-              <%= link_to destroy_user_session_path, method: :delete, class: "text-decoration-none text-dark h5" do %>
-                <i class="fas fa-sign-out-alt"></i> ログアウト
-              <% end %>
-            </li>
-
-          <% else %>
-            <li class="nav-link px-2">
-              <%= link_to about_path, class: "text-decoration-none text-light text-dark h5" do %>
-                <i class="fas fa-heart"></i> About
-              <% end %>
-            <li class="nav-link px-2">
-              <%= link_to new_user_registration_path, class: "text-decoration-none text-dark h5" do %>
-                <i class="fas fa-user-plus"></i> 新規登録
-              <% end %>
-            </li>
-            <li class="nav-link px-2">
-              <%= link_to user_session_path, class: "text-decoration-none text-dark h5" do %>
-                <i class="fas fa-sign-in-alt"></i> ログイン
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
+    <!--現在のログイン状況を表示-->
+    <div class="user-name text-dark pt-4">
+      <% if user_signed_in? %>
+        <p class="">ようこそ、<span class="h5"><strong><%= current_user.name %></strong></span> 様</p>
+      <% elsif admin_signed_in? %>
+        <p class="h5"><strong>管理者ログイン中</strong></p>
+      <% else %>
+        <p class=""><span class="h5"><strong>非ログイン</strong></span></p>
+      <% end %>
     </div>
-  </nav>
-</div>
+
+    <!--ハンバーガーメニューアイコンの設定-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                  aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!--ハンバーガーメニューで表示させる項目-->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+      <ul class="navbar-nav text-right">
+        <!--管理者ログイン時-->
+        <% if admin_signed_in? %>
+          <li class="nav-link px-2">
+            <%= link_to admin_users_path, class: "text-decoration-none text-dark h5" do %>
+              <i class="fas fa-users"></i>登録ユーザー
+            <% end %>
+          </li>
+          <li class="nav-link px-2">
+            <%= link_to destroy_admin_session_path, method: :delete, class: "text-decoration-none text-dark h5" do %>
+              <i class="fas fa-sign-out-alt"></i>ログアウト
+            <% end %>
+          </li>
+
+        <!--ユーザーログイン時-->
+        <% elsif user_signed_in? %>
+          <li class="nav-link px-2">
+            <%= link_to user_path(current_user), class: "text-decoration-none text-dark h5" do %>
+              <i class="fas fa-user"></i> マイページ
+            <% end %>
+          </li>
+          <li class="nav-link px-2">
+            <%= link_to novels_path, class: "text-decoration-none text-dark h5" do %>
+              <i class="fas fa-book"></i> 小説一覧
+            <% end %>
+          </li>
+          <!--ゲストユーザーの場合、新規投稿画面の項目は表示しない-->
+          <% if current_user.name != "guestuser" %>
+            <li class="nav-link px-2">
+              <%= link_to new_novel_path, class: "text-decoration-none text-dark h5" do %>
+                <i class="fas fa-plus-square"></i> 新規投稿
+              <% end %>
+            </li>
+          <% end %>
+          <li class="nav-link px-2">
+            <%= link_to destroy_user_session_path, method: :delete, class: "text-decoration-none text-dark h5" do %>
+              <i class="fas fa-sign-out-alt"></i> ログアウト
+            <% end %>
+          </li>
+
+        <!--ログインしていないとき-->
+        <% else %>
+          <li class="nav-link px-2">
+            <%= link_to about_path, class: "text-decoration-none text-light text-dark h5" do %>
+              <i class="fas fa-heart"></i> About
+            <% end %>
+          <li class="nav-link px-2">
+            <%= link_to new_user_registration_path, class: "text-decoration-none text-dark h5" do %>
+              <i class="fas fa-user-plus"></i> 新規登録
+            <% end %>
+          </li>
+          <li class="nav-link px-2">
+            <%= link_to user_session_path, class: "text-decoration-none text-dark h5" do %>
+              <i class="fas fa-sign-in-alt"></i> ログイン
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
