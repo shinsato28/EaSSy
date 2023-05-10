@@ -9,7 +9,7 @@ class Public::UsersController < ApplicationController
 
   def novels_index
     @user = User.find(params[:id])
-    @novels = @user.novels.where(is_unpublished: false).order(created_at: :desc)
+    @novels = @user.novels.order(created_at: :desc)
   end
 
   def edit
