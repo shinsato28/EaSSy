@@ -41,6 +41,11 @@
         <!--ユーザーログイン時-->
         <% elsif user_signed_in? %>
           <li class="nav-link px-2">
+            <%= link_to home_novels_path, class: "text-decoration-none text-dark h5" do %>
+              <i class="fas fa-home"></i> おすすめ
+            <% end %>
+          </li>
+          <li class="nav-link px-2">
             <%= link_to user_path(current_user), class: "text-decoration-none text-dark h5" do %>
               <i class="fas fa-user"></i> マイページ
             <% end %>
@@ -66,10 +71,6 @@
 
         <!--ログインしていないとき-->
         <% else %>
-          <li class="nav-link px-2">
-            <%= link_to about_path, class: "text-decoration-none text-light text-dark h5" do %>
-              <i class="fas fa-heart"></i> About
-            <% end %>
           <li class="nav-link px-2">
             <%= link_to new_user_registration_path, class: "text-decoration-none text-dark h5" do %>
               <i class="fas fa-user-plus"></i> 新規登録

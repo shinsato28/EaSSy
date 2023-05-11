@@ -27,7 +27,6 @@ Rails.application.routes.draw do
 
   scope module: :public do
     get '/' => "homes#top", as: "root"
-    get 'about' => 'homes#about'
 
     get 'searches/search'
 
@@ -43,6 +42,7 @@ Rails.application.routes.draw do
 
     resources :novels,only: [:index, :show, :new, :create, :edit, :update, :destroy] do
       post :confirm, on: :collection
+      get 'home', on: :collection
       resource :favorites, only: [:create, :destroy]
       resources :novel_comments,only: [:index, :create, :edit, :update, :destroy]
     end

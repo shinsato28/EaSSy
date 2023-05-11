@@ -3,6 +3,11 @@ class Public::NovelsController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
   before_action :ensure_guest_user, only: [:new]
 
+  def home
+    @recently_novels = Novel.where(is_unpublished: false, is_deleted: false).order(created_at: :desc)
+    @most_favorite_novels = Novel.where(is_unpublished: false, is_deleted: false).most_favorite.order("favorites_count DESC").select("novels.*")
+  end
+
   def index
     # @q = Novel.ransack(params[:q])
     if params[:most_favorite]
