@@ -44,7 +44,7 @@
         <h5 class="card-title"><%= link_to novel.title, novel_path(novel) %></h5>
         <h6 class="card-subtitle mb-2 text-muted">
           <% novel.tags.each do |tag| %>
-            <span><%= link_to tag.name, searches_search_path(content: tag.name, model:"tag", method: "perfect") %> </span>
+            <span><%= link_to tag.name, searches_search_path(content: tag.name, model:"tag", method: "perfect"), style: "color: gray;" %> </span>
           <% end %>
         </h6>
         <div>
