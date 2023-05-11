@@ -13,8 +13,6 @@
         <p class="">ようこそ、<span class="h5"><strong><%= current_user.name %></strong></span> 様</p>
       <% elsif admin_signed_in? %>
         <p class="h5"><strong>管理者ログイン中</strong></p>
-      <% else %>
-        <p class=""><span class="h5"><strong>非ログイン</strong></span></p>
       <% end %>
     </div>
 
