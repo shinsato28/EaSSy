@@ -37,7 +37,7 @@ class Public::NovelsController < ApplicationController
   def create
     @novel = Novel.new(novel_params)
     @novel.user_id = current_user.id
-    tag_list = params[:novel][:tag_name].delete(' ').delete('　').split(',')
+    tag_list = params[:novel][:tag_name].split(/[[:space:]]+/)
     #　戻るボタンを押したときまたは、@novelが保存されなかったらnewアクションを実行
     if params[:back] || !@novel.save
       render :new and return
@@ -54,14 +54,14 @@ class Public::NovelsController < ApplicationController
 
   def edit
     @novel = Novel.find(params[:id])
-    @tag_list = @novel.tags.pluck(:name).join(',')
+    @tag_list = @novel.tags.pluck(:name).join(' ')
   end
 
   def update
     @novel = Novel.find(params[:id])
 
     # 付けられたタグを配列として取得する。
-    tag_list = params[:novel][:tag_name].delete(' ').delete('　').split(',')
+    tag_list = params[:novel][:tag_name].split(/[[:space:]]+/)
 
     # updateの条件を満たすかつタグ名の重複がない場合、変更する。
     # 重複の判断にはtag_name_no_duplicateメソッドを使用。メソッドの詳細は下記
