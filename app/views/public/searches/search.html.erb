@@ -9,6 +9,11 @@
         <%= render 'public/searches/user_search', records: @records %>
       <% else %>
       	<h3 class="mb-5">検索ワード: "<%= @content %>" の検索結果</h3>
+        <p>
+          <%= link_to 'いいねが多い順', searches_search_path(content: @content, most_favorite: "true") %>
+          <span>|</span>
+          <%= link_to '新着順', searches_search_path(content: @content, latest: "true") %>
+        </p>
         <%= render 'layouts/novels_index', novels: @records %>
       <% end %>
     </div>
