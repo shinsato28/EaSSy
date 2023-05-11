@@ -1,33 +1,28 @@
-<main>
-  <div class="container">
-    <div class="row">
-      <div class="mx-auto col-6 text-center">
-        <h1 class="pt-5 pb-3">
-          welcome to
-          <strong>
-            EaSSy
-          </strong>
-          !!
-        </h1>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto col-6 text-center">
+      <h1 class="pt-5 pb-3">
+        welcome to <%= image_tag('logo.png') %>!!
+      </h1>
 
-        <p>当サイトは、<strong>誰でも気楽に</strong>短編小説を投稿したり、</p>
-        <p>投稿された小説を<strong>気軽に</strong>読むことを目的としたサイトです。</p>
-        <p class="mb-3">どうぞお気軽にご利用ください。</p>
+      <p>当サイトは、<strong>誰でも気楽に</strong>短編小説を投稿したり、</p>
+      <p>投稿された小説を<strong>気軽に</strong>読むことを目的としたサイトです。</p>
+      <p>新規登録をしていただかなくても、ゲストログインボタンから投稿された小説を閲覧することができます。</p>
+      <p class="mb-3">どうぞお気軽にご利用ください。</p>
 
-        <% unless user_signed_in? %>
-          <div class="btn-wrapper col-11 text-center mx-auto">
-            <div class="row">
-              <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
-            </div>
-            <div class="row mb-3">
-              <%= link_to "Log in", new_user_session_path, class: "text-light btn btn-primary btn-block border mx-auto" %>
-            </div>
-            <div class="row">
-              <%= link_to "Sign up", new_user_registration_path, class: "text-light text-light btn btn-success btn-block border mx-auto" %>
-            </div>
+      <% unless user_signed_in? %>
+        <div class="btn-wrapper col-11 text-center mx-auto">
+          <div class="row">
+            <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
           </div>
-        <% end %>
-      </div>
+          <div class="row mb-3">
+            <%= link_to "ログイン", new_user_session_path, class: "text-light btn btn-primary btn-block border mx-auto" %>
+          </div>
+          <div class="row">
+            <%= link_to "新規登録", new_user_registration_path, class: "text-light text-light btn btn-success btn-block border mx-auto" %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
-</main>
+</div>

@@ -52,10 +52,6 @@ class Novel < ApplicationRecord
     # novelのタイトルの検索結果とtagの検索結果のハッシュを結合して、作成日が新しい順、重複なしで返す
     result = (novel_results + tag_results).sort_by(&:created_at).reverse
     return result.uniq
-    # novel_result = Novel.where(is_deleted: false, is_unpublished: false).where('title LIKE ?', '%' + content + '%').distinct.order(created_at: :desc)
-    # tags = Tag.where(name: content)
-    # tag_result = tags.flat_map { |tag| tag.novels.where(is_unpublished: false, is_deleted: false) }.sort_by(&:created_at).reverse
-    # result = (novel_result + tag_result).sort_by(&:created_at).reverse
   end
 
 end

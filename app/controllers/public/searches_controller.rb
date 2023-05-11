@@ -15,14 +15,5 @@ class Public::SearchesController < ApplicationController
       keywords = params[:content].split(/[[:space:]]+/)
       @records = Novel.search_by_keywords(keywords)
     end
-
-    # ransackを使用する検索処理
-    # if @model == 'user'
-    #   @q = User.ransack(params[:q])
-    #   @users = @q.result(distinct: true).order("created_at desc")
-    # else
-    #   @q = Novel.ransack(params[:q])
-    #   @records = @q.result(distinct: true).includes(:user).order("created_at desc")
-    # end
   end
 end
