@@ -2,7 +2,7 @@
   <% novels.first(4).each do |novel| %>
     <div class="card px-2">
       <!-- Cardの内容 -->
-      <h5 class="card-title"><%= link_to novel.title, novel_path(novel) %></h5>
+      <h5 class="card-title"><%= link_to novel.title, novel_path(novel), style: "color: black;" %></h5>
       <h6 class="card-subtitle mb-2">
         <% if novel.tags.count == 0 %>
           </br>
