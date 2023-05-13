@@ -11,11 +11,11 @@ class Public::NovelsController < ApplicationController
   def index
     # @q = Novel.ransack(params[:q])
     if params[:most_favorite]
-      @novels = Novel.most_favorite.order("favorites_count DESC").select("novels.*")
+      @novels = Novel.where(is_unpublished: false, is_deleted: false).page(params[:page]).most_favorite.order("favorites_count DESC").select("novels.*")
     elsif params[:latest]
-      @novels = Novel.latest
+      @novels = Novel.where(is_unpublished: false, is_deleted: false).page(params[:page]).latest
     else
-      @novels = Novel.where(is_unpublished: false, is_deleted: false).order(created_at: :desc)
+      @novels = Novel.where(is_unpublished: false, is_deleted: false).order(created_at: :desc).page(params[:page])
     end
   end
 
