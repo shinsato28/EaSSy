@@ -2,12 +2,12 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_admin! # ログイン済管理者のみにアクセスを許可する
 
   def index
-    @users = User.all
+    @users = User.page(params[:page])
   end
 
   def novels_index
     @user = User.find(params[:id])
-    @novels = @user.novels
+    @novels = @user.novels.page(params[:page])
   end
 
   def show

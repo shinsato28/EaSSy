@@ -28,6 +28,11 @@
         <!--管理者ログイン時-->
         <% if admin_signed_in? %>
           <li class="nav-link px-2">
+            <%= link_to admin_top_path, class: "text-decoration-none text-dark h5" do %>
+              <i class="fas fa-search"></i>検索
+            <% end %>
+          </li>
+          <li class="nav-link px-2">
             <%= link_to admin_users_path, class: "text-decoration-none text-dark h5" do %>
               <i class="fas fa-users"></i>登録ユーザー
             <% end %>
