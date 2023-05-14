@@ -1,6 +1,6 @@
 <div class="container mt-2">
   <div class="row d-flex justify-content-center mb-5">
-    <div class="col-10">
+    <div class="col-12">
       <%= form_with model: @novel do |f| %>
         <div class="mb-3 p-3 border bg-light">
           <h2 class="mb-4"><%= @novel.title %></h2>
@@ -10,7 +10,7 @@
           <% end %>
         </div>
 
-        <div class="mb-5 px-3 py-2 border bg-light" id="show-novel-text">
+        <div class="mb-5 px-4 py-3 border bg-light" id="show-novel-text">
           <%=safe_join(@novel.body.split("\n"),tag(:br))%>
         </div>
 
