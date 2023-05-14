@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get 'homes/top', as: "top"
+    get 'searches/search'
 
     resources :users,only: [:index, :show, :edit, :update] do
       get "novels_index", on: :member

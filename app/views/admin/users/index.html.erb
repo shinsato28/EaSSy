@@ -8,6 +8,7 @@
           <tr class="table-secondary">
             <th>id</th>
             <th>名前</th>
+            <th>投稿数</th>
             <th>メールアドレス</th>
             <th>ステータス</th>
           </tr>
@@ -18,6 +19,7 @@
             <tr>
               <td><%= user.id %></td>
               <td><%= link_to user.name, admin_user_path(user) %></td>
+              <td><%= link_to user.novels.count, novels_index_admin_user_path(user) %></td>
               <td><%= user.email %></td>
               <% if user.is_deleted == false %>
                 <td class="text-success">有効</td>
@@ -31,3 +33,5 @@
     </div>
   </div>
 </div>
+
+<%= paginate @users %>
