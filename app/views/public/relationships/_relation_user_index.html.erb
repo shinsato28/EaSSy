@@ -21,7 +21,7 @@
             </h6>
             <div>
               <span class="mr-5 favorite-btn">
-                <%= render "public/favorites/favorites-btn", novel: novel %>
+                ♡<%= novel.favorites.count %>
               </span>
               <span class="mr-5">
                 <%= link_to novel_novel_comments_path(novel), class: "text-decoration-none text-dark h5" do %>
@@ -29,7 +29,6 @@
                 <% end %>
               </span>
               <p>投稿日: <%= l novel.created_at %></p>
-              <p class="card-text">投稿者: <%= link_to novel.user.name, user_path(novel.user) %></p>
             </div>
           </div>
         <% end %>
