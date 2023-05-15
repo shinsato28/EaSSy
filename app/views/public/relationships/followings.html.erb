@@ -1,2 +1,12 @@
-<h1>Public::Relationships#followings</h1>
-<p>Find me in app/views/public/relationships/followings.html.erb</p>
+<div class="container mt-2 mb-5">
+  <div class="row">
+    <div class="col-10">
+      <h3 class="my-3"><%= @user.name %> 様のフォロ一覧</h3>
+      <% if @users.count == 0 %>
+        <h4>フォローしている作者がいません</h4>
+      <% else %>
+        <%= render 'relation_user_index', users: @users %>
+      <% end %>
+    </div>
+  </div>
+</div>
