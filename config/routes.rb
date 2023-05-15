@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
+      
       patch 'withdraw', on: :collection
       get 'unsubscribe', on: :collection
       get "novels_index", on: :member

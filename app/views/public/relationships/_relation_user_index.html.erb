@@ -1,0 +1,39 @@
+<% @users.each do |user| %>
+  <div class="border px-3 pb-3 mb-3">
+    <h4><%= link_to user.name, user_path(user) %></h4>
+    <p>最近の投稿</p>
+    <div class="card-deck mt-3">
+      <% if user.novels.count == 0 %>
+        <h3 class="ml-3">投稿作品がありません</h3>
+      <% else %>
+        <% user.novels.first(4).each do |novel| %>
+          <div class="card px-2">
+            <!-- Cardの内容 -->
+            <h5 class="card-title"><%= link_to novel.title, novel_path(novel), style: "color: black;" %></h5>
+            <h6 class="card-subtitle mb-2">
+              <% if novel.tags.count == 0 %>
+                </br>
+              <% else %>
+                <% novel.tags.each do |tag| %>
+                  <span><%= link_to tag.name, searches_search_path(content: tag.name, model:"tag", method: "perfect"), style: "color: gray;" %></span>
+                <% end %>
+              <% end %>
+            </h6>
+            <div>
+              <span class="mr-5 favorite-btn">
+                <%= render "public/favorites/favorites-btn", novel: novel %>
+              </span>
+              <span class="mr-5">
+                <%= link_to novel_novel_comments_path(novel), class: "text-decoration-none text-dark h5" do %>
+                  <i class="fas fa-comment-dots"></i> <%= novel.novel_comments.count %>
+                <% end %>
+              </span>
+              <p>投稿日: <%= l novel.created_at %></p>
+              <p class="card-text">投稿者: <%= link_to novel.user.name, user_path(novel.user) %></p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
