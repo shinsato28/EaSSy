@@ -1,0 +1,39 @@
+<div class="mb-3">
+  <% novels.each do |novel| %>
+    <div class="card mb-1">
+      <div class="card-body">
+        <% if novel.is_deleted == true %>
+          <h5 class="card-title text-danger"><strong>管理者によって削除済み</strong></h5>
+          <div class="text-right">
+            <%= link_to edit_admin_novel_path(novel) do %>
+              <button class="btn btn-success" type="submit">編集する</button>
+            <% end %>
+          </div>
+        <% else %>
+          <h5 class="card-title"><%= link_to novel.title, novel_path(novel), style: "color: black;" %></h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            <% novel.tags.each do |tag| %>
+              <span style="list-style: none;"><%= tag.name %> </span>
+            <% end %>
+          </h6>
+          <p class="card-text">投稿者: <%= link_to novel.user.name, admin_user_path(novel.user) %></p>
+          <p class="card-text">投稿日: <%= l novel.created_at %></p>
+          <% if novel.is_unpublished == false %>
+            <p class="card-text text-success">ステータス: 公開中</p>
+          <% else %>
+            <p class="card-text text-danger">ステータス: 非公開</p>
+          <% end %>
+          <span class="mr-5">♡<%= novel.favorites.count %></span>
+          <%= link_to admin_novel_novel_comments_path(novel), class: "text-decoration-none text-dark h5" do %>
+            <i class="fas fa-comment-dots"></i> <%= novel.novel_comments.count %>
+          <% end %>
+          <div class="text-right">
+            <%= link_to edit_admin_novel_path(novel) do %>
+              <button class="btn btn-success" type="submit">編集する</button>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

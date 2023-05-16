@@ -1,0 +1,8 @@
+<div class="container mt-2">
+  <div class="row d-flex justify-content-center">
+    <div class="col-8">
+      <h3 class="mt-3"><%= @user.name %> 様がいいねした投稿</h3>
+      <%= render 'layouts/novels_index', novels: @like_novels, user: @user %>
+    </div>
+  </div>
+</div>

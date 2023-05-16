@@ -1,0 +1,19 @@
+@use '~bootstrap/scss/bootstrap';
+@use '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+header {
+    background-color: #F2F0ED;
+}
+
+footer {
+    background-color: #4c4948;
+}
+
+.column-table-head{
+    background-color: #C0C0C0;
+    width: 25%;
+}
+
+#show-novel-text{
+    font-size: 20px;
+}

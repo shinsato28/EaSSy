@@ -1,0 +1,85 @@
+<div class="mb-3">
+  <% novels.each do |novel| %>
+  <div class="card mb-1", id="novel_<%= novel.id %>">
+    <div class="card-body">
+      <% if novel.is_deleted == true %>
+        <h5 class="card-title text-danger"><strong>管理者によって削除済み</strong></h5>
+
+      <% elsif novel.is_unpublished == true %>
+        <% if current_user.id == novel.user.id %>
+          <h5 class="card-title"><%= link_to novel.title, novel_path(novel) %></h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            <% novel.tags.each do |tag| %>
+              <span><%= link_to tag.name, searches_search_path(content: tag.name, model:"tag") %> </span>
+            <% end %>
+          </h6>
+          <div>
+            <span class="mr-5 favorite-btn">
+              <%= render "public/favorites/favorites-btn", novel: novel %>
+            </span>
+            <span class="mr-5">
+              <%= link_to novel_novel_comments_path(novel), class: "text-decoration-none text-dark h5" do %>
+                <i class="fas fa-comment-dots"></i> <%= novel.novel_comments.count %>
+              <% end %>
+            </span>
+            <span>投稿日: <%= l novel.created_at %></span></br>
+            <p class="card-text text-right">投稿者: <%= link_to novel.user.name, user_path(novel.user) %></p>
+            <div class="text-right">
+              <% if action_name == 'novels_index' && novel.user.id == current_user.id %>
+                <% if novel.is_unpublished == false %>
+                  <p class="card-text text-success">ステータス: 公開中</p>
+                <% else %>
+                  <p class="card-text text-danger">ステータス: 非公開</p>
+                <% end %>
+                <div class="text-right">
+                  <%= link_to edit_novel_path(novel) do %>
+                    <button class="btn btn-success" type="submit">編集する</button>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <h5 class="card-title text-danger"><strong>投稿者によって非公開に設定されています</strong></h5>
+        <% end %>
+
+      <% else %>
+        <h5 class="card-title"><%= link_to novel.title, novel_path(novel), style: "color: black;" %></h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          <% novel.tags.each do |tag| %>
+            <span><%= link_to tag.name, searches_search_path(content: tag.name, model:"tag", method: "perfect"), style: "color: gray;" %> </span>
+          <% end %>
+        </h6>
+        <div>
+          <span class="mr-5 favorite-btn">
+            <%= render "public/favorites/favorites-btn", novel: novel %>
+          </span>
+          <span class="mr-5">
+            <%= link_to novel_novel_comments_path(novel), class: "text-decoration-none text-dark h5" do %>
+              <i class="fas fa-comment-dots"></i> <%= novel.novel_comments.count %>
+            <% end %>
+          </span>
+          <span>投稿日: <%= l novel.created_at %></span></br>
+          <p class="card-text text-right">投稿者: <%= link_to novel.user.name, user_path(novel.user) %></p>
+          <div class="text-right">
+            <% if action_name == 'novels_index' && novel.user.id == current_user.id %>
+              <% if novel.is_unpublished == false %>
+                <p class="card-text text-success">ステータス: 公開中</p>
+              <% else %>
+                <p class="card-text text-danger">ステータス: 非公開</p>
+              <% end %>
+              <div class="text-right">
+                <%= link_to edit_novel_path(novel) do %>
+                  <button class="btn btn-success" type="submit">編集する</button>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<%= paginate novels %>

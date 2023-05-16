@@ -1,0 +1,15 @@
+<div class="container mt-2">
+  <div class="row d-flex justify-content-center">
+    <div class="col-8 mb-5">
+      <h3 class="mt-3 mb-3">投稿された小説</h3>
+      <%= render 'public/searches/search_form' %>
+      <p>
+        <%= link_to 'いいねが多い順', novels_path(most_favorite: "true") %>
+        <span>|</span>
+        <%= link_to '新着順', novels_path(latest: "true") %>
+      </p>
+      <%= render 'layouts/novels_index', novels: @novels %>
+    </div>
+  </div>
+</div>
+

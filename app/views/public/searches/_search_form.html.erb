@@ -1,0 +1,16 @@
+<!--検索フォーム用のテンプレーション-->
+<div class="mb-3 text-right">
+  <% if user_signed_in? %>
+    <%= form_with url: searches_search_path, method: :get, local: true do |f| %>
+      <%= f.text_field :content, class: "form-control mb-1", placeholder: "検索する文字を入力してください" %>
+      <%= f.select :model, options_for_select({ "Novel" => "novel", "User" => "user" }) %>
+      <%= f.submit '検索' %>
+    <% end %>
+  <% elsif admin_signed_in? %>
+    <%= form_with url: admin_searches_search_path, method: :get, local: true do |f| %>
+      <%= f.text_field :content, class: "form-control mb-1", placeholder: "検索する文字を入力してください" %>
+      <%= f.select :model, options_for_select({ "Novel" => "novel", "User" => "user" }) %>
+      <%= f.submit '検索' %>
+    <% end %>
+  <% end %>
+</div>

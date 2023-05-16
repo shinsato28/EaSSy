@@ -1,0 +1,8 @@
+<% if obj.errors.any? %>
+  <h4><strong><%= obj.errors.count %>件のエラーが発生しました</strong></h4>
+    <ul>
+      <% obj.errors.full_messages.each do |message| %>
+        <h5><li><%= message %></li></h5>
+      <% end %>
+    </ul>
+<% end %>

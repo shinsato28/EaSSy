@@ -1,0 +1,29 @@
+<div class="container mt-2">
+  <div class="row d-flex justify-content-center mb-5">
+    <div class="col-10">
+      <%= form_with model: @novel do |f| %>
+      <h3 class="mb-2"><%= @novel.title %></h3>
+      <div class="contents-area mb-5"><%=safe_join(@novel.body.split("\n"),tag(:br))%></div>
+
+      <div class="form-group mb-3">
+        <%= f.label :tag, "タグ" %>
+        <%= f.text_field :tag_name, placeholder: "複数タグは間にスペースを入力してください。", class: 'form-control novel_tag_name' %>
+      </div>
+
+      <!--confirmからcreateへ情報を渡すためのデータ保持フィールド-->
+      <%= f.hidden_field :title %>
+      <%= f.hidden_field :body %>
+
+      <div class="mb-3">以上の内容で投稿してよろしいでしょうか？</div>
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          <%= f.submit "戻る", name: :back, class: "btn btn-primary" %>
+        </div>
+        <div class="btn-group ml-auto">
+          <%= f.submit "投稿する", class: "btn btn-success" %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

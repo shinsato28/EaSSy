@@ -1,0 +1,29 @@
+<div class="container mt-2">
+  <div class="row d-flex justify-content-center mb-5">
+    <div class="col-10">
+      <%= render 'layouts/error', obj: @novel %>
+      <h3 class="mb-4">編集画面</h3>
+      <%= form_with model: @novel, url:admin_novel_path, method: :patch do |f| %>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <th class="column-table-head">削除ステータス</th>
+              <td>
+                <%= f.radio_button :is_deleted, false %>
+                <%= f.label :is_deleted, '有効', class: "mr-2" %>
+                <%= f.radio_button :is_deleted, true %>
+                <%= f.label :is_deleted, '削除' %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-grid gap-2 d-md-block">
+          <%= link_to :back, class: 'text-light' do %>
+            <button class="btn btn-primary" type="submit">戻る</button>
+          <% end %>
+          <%= f.submit "変更を保存", class:"  btn btn-success" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

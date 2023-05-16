@@ -1,0 +1,57 @@
+<div class="container mt-2">
+  <div class="row d-flex justify-content-center">
+    <div class="col-8">
+      <h3 class="text-center mt-3"><%= @user.name %> 様</h3>
+
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th class="column-table-head">名前</th>
+            <td style="width: 30%"><%= @user.name %></td>
+            <td>
+              <% if current_user.following?(@user) && current_user != @user %>
+                <%= link_to "フォロー中", user_relationships_path(@user.id), method: :delete, class: "btn btn-success" %>
+              <% elsif current_user != @user %>
+                <%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class: "btn btn-light border" %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th class="column-table-head">投稿数</th>
+            <td><%= link_to @novels.count, novels_index_user_path(@user) %></td>
+          </tr>
+          <tr>
+            <th class="column-table-head">フォロー</th>
+            <td><%= link_to @user.followings.count, user_followings_path(@user) %></td>
+          </tr>
+          <tr>
+            <th class="column-table-head">フォロワー</th>
+            <td><%= link_to @user.followers.count, user_followers_path(@user) %></td>
+          </tr>
+            <th class="column-table-head">いいねした投稿</th>
+            <td><%= link_to "いいね一覧", favorites_index_user_path(@user) %></td>
+          </tr>
+          <tr>
+            <th class="column-table-head">ステータス</th>
+            <% if @user.is_deleted == false %>
+              <td class="text-success">有効</td>
+            <% else %>
+              <td class="text-danger">退会</td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="d-grid gap-2 d-md-block">
+        <%= link_to :back, class: 'text-light' do %>
+          <button class="btn btn-primary" type="submit">戻る</button>
+        <% end %>
+        <% if @user.id == current_user.id && @user.name != "guestuser" %>
+          <%= link_to edit_user_path(@user), class: 'text-light' do %>
+            <button class="btn btn-success" type="submit">編集する</button>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

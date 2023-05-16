@@ -1,0 +1,43 @@
+<div class="container mt-2">
+  <div class="row d-flex justify-content-center mb-5">
+    <div class="col-10">
+      <%= render 'layouts/error', obj: @novel %>
+      <h3 class="mb-4">編集画面</h3>
+
+      <%= form_with model: @novel do |f| %>
+        <div class="form-group mb-3">
+          <%= f.label :title, "タイトル" %>
+          <%= f.text_field :title, placeholder: "タイトルを入力してください", class: "form-control" %>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.label :tag, "タグ" %>
+          <%= f.text_field :tag_name, placeholder: "複数タグは間にスペースを入力してください。", class: 'form-control novel_tag_name', value: @tag_list %>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.label :body, "本文" %>
+          <%= f.text_area :body, placeholder: "本文を入力してください", class: 'form-control', style: "height: 1000px;" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.radio_button :is_unpublished, false %>
+          <%= f.label :is_unpublished, '公開', class: "mr-2" %>
+          <%= f.radio_button :is_unpublished, true %>
+          <%= f.label :is_unpublished, '非公開' %>
+        </div>
+
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <%= link_to :back, class: 'text-light' do %>
+              <button class="btn btn-danger" type="submit">キャンセル</button>
+            <% end %>
+          </div>
+          <div class="btn-group ml-auto">
+            <%= f.submit "変更内容を保存", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

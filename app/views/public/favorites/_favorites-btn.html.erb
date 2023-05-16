@@ -1,0 +1,9 @@
+<% if novel.favorited_by?(current_user) %>
+  <%= link_to novel_favorites_path(novel), method: :delete, remote: true do %>
+    ♥<%= novel.favorites.count %>
+  <% end %>
+<% else %>
+  <%= link_to novel_favorites_path(novel), method: :post, remote: true do %>
+    ♡<%= novel.favorites.count %>
+  <% end %>
+<% end %>

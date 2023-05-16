@@ -1,0 +1,12 @@
+<div class="container mt-2 mb-5">
+  <div class="row">
+    <div class="col-10">
+      <h3 class="my-3"><%= @user.name %> 様のフォロワー一覧</h3>
+      <% if @users.count == 0 %>
+        <h4>フォロワーがいません</h4>
+      <% else %>
+        <%= render 'relation_user_index', users: @users %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="container mt-2">
+  <div class="row d-flex justify-content-center mb-5">
+    <div class="col-12">
+      <%= form_with model: @novel do |f| %>
+        <div class="mb-3 p-3 border bg-light">
+          <h2 class="mb-4"><%= @novel.title %></h2>
+          <p class="mb-4">投稿者: <%= link_to @novel.user.name, user_path(@novel.user) %></p>
+          <% @novel.tags.each do |tag| %>
+            <span><%= tag.name %> </span>
+          <% end %>
+        </div>
+
+        <div class="mb-5 px-4 py-3 border bg-light" id="show-novel-text">
+          <%=safe_join(@novel.body.split("\n"),tag(:br))%>
+        </div>
+
+        <div class="text-right">
+          <% if admin_signed_in? %>
+            <%= link_to novels_index_admin_user_path(@novel.user), class: '' do %>
+              <button class="btn btn-success" type="submit">もっと<%= @novel.user.name %>の投稿を見る</button>
+            <% end %>
+          <% else %>
+            <%= link_to novels_index_user_path(@novel.user), class: '' do %>
+              <button class="btn btn-success" type="submit">もっと<%= @novel.user.name %>の投稿を見る</button>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
