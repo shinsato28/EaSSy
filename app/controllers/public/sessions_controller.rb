@@ -44,15 +44,18 @@ class Public::SessionsController < Devise::SessionsController
   def user_state
     @user = User.find_by(email: params[:user][:email])
 
-    # ユーザーのパスワードが一致かつ退会していないならログイン
-    if @user && @user.valid_password?(params[:user][:password]) &&  @user.is_deleted == false
+    # 入力されたメールアドレスの持ち主がいない場合の処理
+    if @user.nil?
+      flash[:notice] = "ユーザーが存在しません。メールアドレス、またはパスワードが正しいかご確認ください。"
+    # ユーザーが退会済みなら新規登録画面に遷移
+    elsif @user.is_deleted == true
+      flash[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
+      redirect_to new_user_registration_path
+    # ユーザーのパスワードが一致ならログイン
+    elsif @user && @user.valid_password?(params[:user][:password])
       flash[:notice] = "ログインに成功しました。"
     elsif @user && !@user.valid_password?(params[:user][:password])
       flash[:notice] = "パスワードが違います。"
-    # ユーザーが退会済みなら新規登録画面に遷移
-    else
-      flash[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
-      redirect_to new_user_registration_path
     end
   end
 end
