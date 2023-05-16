@@ -22,7 +22,7 @@
       </table>
 
       <div class="d-grid gap-2 d-md-block">
-        <%= link_to :back, class: 'text-light' do %>
+        <%= link_to user_path(@user), class: 'text-light' do %>
           <button class="btn btn-primary" type="submit">戻る</button>
         <% end %>
         <%= f.submit "変更を保存", class:"  btn btn-success" %>

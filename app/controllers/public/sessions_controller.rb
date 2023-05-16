@@ -42,17 +42,17 @@ class Public::SessionsController < Devise::SessionsController
 
   # ログインしようとしたユーザーが退会済みなら新規登録画面へ遷移させる
   def user_state
-    ## 【処理内容1】 入力されたemailからアカウントを1件取得
     @user = User.find_by(email: params[:user][:email])
-    ## アカウントを取得できなかった場合、このメソッドを終了する
-    return if !@user
-    ## 【処理内容2】 取得したアカウントのパスワードと入力されたパスワードが一致してるかを判別
-    if @user.valid_password?(params[:user][:password]) && @user.is_deleted == true
-      ## 【処理内容3】処理内容2がtrueかつcustomerのis_deletedがtrueならサインアップ画面に遷移
+
+    # ユーザーのパスワードが一致かつ退会していないならログイン
+    if @user && @user.valid_password?(params[:user][:password]) &&  @user.is_deleted == false
+      flash[:notice] = "ログインに成功しました。"
+    elsif @user && !@user.valid_password?(params[:user][:password])
+      flash[:notice] = "パスワードが違います。"
+    # ユーザーが退会済みなら新規登録画面に遷移
+    else
       flash[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
       redirect_to new_user_registration_path
-    else
-      flash[:notice] = "ログインに成功しました。"
     end
   end
 end
