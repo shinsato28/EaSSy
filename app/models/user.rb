@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # "is_deleted"カラムが変更された際に呼び出される
+  before_update :update_novels_unpublished, if: :is_deleted_changed?
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -45,4 +48,14 @@ class User < ApplicationRecord
   def self.search_for(content)
     User.where(is_deleted: false).where('name LIKE ?', '%' + content + '%').distinct
   end
+
+  private
+
+  # userのis_deletedがtrueの場合、投稿した小説をすべて非公開にする。
+  def update_novels_unpublished
+    if self.is_deleted
+      self.novels.update_all(is_unpublished: true)
+    end
+  end
+
 end
