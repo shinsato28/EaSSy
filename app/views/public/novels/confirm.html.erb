@@ -3,8 +3,10 @@
     <div class="col-10">
       <%= form_with model: @novel do |f| %>
       <h3 class="mb-2"><%= @novel.title %></h3>
+      <!--文章の内容を改行ありで表示-->
       <div class="contents-area mb-5"><%=safe_join(@novel.body.split("\n"),tag(:br))%></div>
 
+      <!--タグの入力フォーム-->
       <div class="form-group mb-3">
         <%= f.label :tag, "タグ" %>
         <%= f.text_field :tag_name, placeholder: "複数タグは間にスペースを入力してください。", class: 'form-control novel_tag_name' %>

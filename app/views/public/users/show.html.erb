@@ -8,6 +8,7 @@
           <tr>
             <th class="column-table-head">名前</th>
             <td style="width: 30%"><%= @user.name %></td>
+            <!--ゲストユーザーには表示させない-->
             <% if current_user.name != "guestuser" %>
               <td>
                 <% if current_user.following?(@user) && current_user != @user %>

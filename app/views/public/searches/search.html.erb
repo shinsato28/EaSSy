@@ -1,14 +1,17 @@
 <div class="container mt-2">
   <div class="row d-flex justify-content-center">
     <div class="col-8 mt-3 mb-5">
+      <!--タグ検索の場合-->
       <% if @model == 'tag' %>
       	<h3 class="mb-3">タグ: "<%= @content %>" の検索結果</h3>
         <%= render 'public/searches/search_form' %>
         <%= render 'layouts/novels_index', novels: @records %>
+      <!--ユーザー検索の場合-->
       <% elsif @model == 'user' %>
         <h3 class="mb-3">ユーザー名: "<%= @content %>" の検索結果</h3>
         <%= render 'public/searches/search_form' %>
         <%= render 'public/searches/user_search', records: @records %>
+      <!--小説検索の場合-->
       <% else %>
       	<h3 class="mb-3">検索ワード: "<%= @content %>" の検索結果</h3>
         <%= render 'public/searches/search_form' %>

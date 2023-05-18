@@ -8,7 +8,7 @@
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <!--タブのアイコン-->
+    <!--タブのアイコンの設定-->
     <%= favicon_link_tag('favicon.ico') %>
   </head>
 
@@ -17,11 +17,11 @@
   </header>
 
   <body>
+    <!--フラッシュメッセージの表示位置-->
     <p class="notice"><%= notice %></p>
     <%= yield %>
   </body>
 
   <footer>
-    <%= render 'layouts/footer' %>
   </footer>
 </html>

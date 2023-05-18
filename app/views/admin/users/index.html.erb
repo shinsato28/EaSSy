@@ -21,6 +21,7 @@
               <td><%= link_to user.name, admin_user_path(user) %></td>
               <td><%= link_to user.novels.count, novels_index_admin_user_path(user) %></td>
               <td><%= user.email %></td>
+              <!--ユーザーのステータスを表示-->
               <% if user.is_deleted == false %>
                 <td class="text-success">有効</td>
               <% else %>
