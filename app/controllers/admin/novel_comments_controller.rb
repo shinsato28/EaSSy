@@ -1,4 +1,6 @@
 class Admin::NovelCommentsController < ApplicationController
+  before_action :authenticate_admin!
+  
   def index
     @novel = Novel.find(params[:novel_id])
     @comments = @novel.novel_comments.order(created_at: :desc)

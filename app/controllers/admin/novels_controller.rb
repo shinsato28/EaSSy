@@ -1,4 +1,5 @@
 class Admin::NovelsController < ApplicationController
+  before_action :authenticate_admin!
 
   def edit
     @novel = Novel.find(params[:id])
