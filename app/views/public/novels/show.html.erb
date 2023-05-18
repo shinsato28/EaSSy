@@ -10,6 +10,7 @@
           <% end %>
         </div>
 
+        <!--文章の内容を改行ありで表示-->
         <div class="mb-5 px-4 py-3 border bg-light" id="show-novel-text">
           <%=safe_join(@novel.body.split("\n"),tag(:br))%>
         </div>

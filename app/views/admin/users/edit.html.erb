@@ -1,3 +1,4 @@
+<!--名前、メールアドレス、ステータスを編集できる-->
 <div class="container mt-2">
   <div class="row d-flex justify-content-center">
     <div class="col-8">
@@ -20,6 +21,7 @@
           </tr>
           <tr>
             <th class="column-table-head">ステータス</th>
+            <!--ラジオボタンでユーザーの退会、有効を選択できる-->
             <td>
               <%= f.radio_button :is_deleted, false %>
               <%= f.label :is_deleted, '有効', class: "mr-2" %>

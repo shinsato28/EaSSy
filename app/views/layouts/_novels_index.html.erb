@@ -2,9 +2,11 @@
   <% novels.each do |novel| %>
   <div class="card mb-1", id="novel_<%= novel.id %>">
     <div class="card-body">
+      <!--小説が削除されていた場合-->
       <% if novel.is_deleted == true %>
         <h5 class="card-title text-danger"><strong>管理者によって削除済み</strong></h5>
 
+      <!--小説が非公開の場合、投稿者自身の場合は小説名などを表示させる-->
       <% elsif novel.is_unpublished == true %>
         <% if current_user.id == novel.user.id %>
           <h5 class="card-title"><%= link_to novel.title, novel_path(novel) %></h5>
@@ -39,10 +41,12 @@
               <% end %>
             </div>
           </div>
+        <!--投稿者でないなら下記のみ表示させる-->
         <% else %>
           <h5 class="card-title text-danger"><strong>投稿者によって非公開に設定されています</strong></h5>
         <% end %>
 
+      <!--小説が非公開でも削除されてもいない場合-->
       <% else %>
         <h5 class="card-title"><%= link_to novel.title, novel_path(novel), style: "color: black;" %></h5>
         <h6 class="card-subtitle mb-2 text-muted">
@@ -66,6 +70,7 @@
           <span>投稿日: <%= l novel.created_at %></span></br>
           <p class="card-text text-right">投稿者: <%= link_to novel.user.name, user_path(novel.user) %></p>
           <div class="text-right">
+            <!--ユーザーの投稿一覧画面の場合かつ、投稿者自身なら公開ステータスと編集ボタンを表示させる-->
             <% if action_name == 'novels_index' && novel.user.id == current_user.id %>
               <% if novel.is_unpublished == false %>
                 <p class="card-text text-success">ステータス: 公開中</p>

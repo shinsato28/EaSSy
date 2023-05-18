@@ -5,18 +5,21 @@ class Novel < ApplicationRecord
   has_many :tags, through: :tag_maps
   belongs_to :user
 
+  # 小説はタイトルは50文字以下
   validates :title,length:{maximum:50},presence:true
   validates :body,presence:true
 
 
-  # メソッド
+  # novelに対して既にいいねしていたらtrueを返す
   def favorited_by?(user)
     favorites.exists?(user_id: user&.id)
   end
 
+  # novelのソート時に使う
   scope :most_favorite, -> { left_joins(:favorites).select(:id, "COUNT(favorites.id) AS favorites_count").group(:id) }
   scope :latest, -> {order(created_at: :desc)}
 
+  # novelの投稿と編集時にタグの管理を行うメソッド
   def save_posts(tags)
     # 付けられたタグを取得
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
