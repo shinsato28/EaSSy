@@ -2,3 +2,13 @@ ja:
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
+  errors:
+    messages:
+      not_saved: "保存できませんでした"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "このメールアドレスは既に使用されています"
