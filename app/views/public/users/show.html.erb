@@ -7,7 +7,7 @@
         <tbody>
           <tr>
             <th class="column-table-head">名前</th>
-            <td style="width: 30%"><%= @user.name %></td>
+            <td style="width: 20%"><%= @user.name %></td>
             <!--ゲストユーザーには表示させない-->
             <% if current_user.name != "guestuser" %>
               <td>
@@ -22,10 +22,14 @@
           <tr>
             <th class="column-table-head">投稿数</th>
             <td><%= link_to @novels.count, novels_index_user_path(@user) %></td>
+            <!--2行目3列目に表示-->
+            <th class="column-table-head">自己紹介</th>
           </tr>
           <tr>
             <th class="column-table-head">フォロー</th>
             <td><%= link_to @user.followings.count, user_followings_path(@user) %></td>
+            <!--3~6行目の3列目に表示-->
+            <td rowspan="4" class="text-break"><%= safe_join(@user.introduction.split("\n"),tag(:br)) %></td>
           </tr>
           <tr>
             <th class="column-table-head">フォロワー</th>

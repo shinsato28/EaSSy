@@ -18,6 +18,10 @@
             <th class="column-table-head"><%= f.label "メールアドレス" %></th>
             <td><%= f.text_field :email, class: "form-control" %></td>
           </tr>
+          <tr>
+            <th class="column-table-head"><%= f.label "自己紹介" %></th>
+            <td><%= f.text_area :introduction, class: "form-control", style: "height: 150px;" %></td>
+          </tr>
         </tbody>
       </table>
 
