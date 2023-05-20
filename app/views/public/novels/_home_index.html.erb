@@ -15,7 +15,11 @@
       </h6>
       <div>
         <span class="mr-5 favorite-btn">
-          <%= render "public/favorites/favorites-btn", novel: novel %>
+            <% if current_user.name == "guestuser" %>
+              ♡<%= novel.favorites.count %>
+            <% else %>
+              <%= render "public/favorites/favorites-btn", novel: novel %>
+            <% end %>
         </span>
         <span class="mr-5">
           <%= link_to novel_novel_comments_path(novel), class: "text-decoration-none text-dark h5" do %>
