@@ -40,6 +40,7 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
     likes = Favorite.where(user_id: @user.id).pluck(:novel_id)
     @like_novels = Novel.find(likes)
+    @like_novels = Kaminari.paginate_array(@like_novels).page(params[:page])
   end
 
   private

@@ -26,13 +26,13 @@
             <th class="column-table-head">自己紹介</th>
           </tr>
           <tr>
-            <th class="column-table-head">フォロー</th>
+            <th class="column-table-head">フォロー数</th>
             <td><%= link_to @user.followings.count, user_followings_path(@user) %></td>
             <!--3~6行目の3列目に表示-->
             <td rowspan="4" class="text-break"><%= safe_join(@user.introduction.split("\n"),tag(:br)) %></td>
           </tr>
           <tr>
-            <th class="column-table-head">フォロワー</th>
+            <th class="column-table-head">フォロワー数</th>
             <td><%= link_to @user.followers.count, user_followers_path(@user) %></td>
           </tr>
             <th class="column-table-head">いいねした投稿</th>
