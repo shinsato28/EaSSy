@@ -50,9 +50,9 @@ class Novel < ApplicationRecord
 
       # 検索欄に入力された複数のワードをeachで取り出し、結果に入れる
       contents[1..-1].each do |content|
-        novel_results = novel_results.where('title LIKE ?', "%#{content}%")
+        novel_results += self.where(is_deleted: false, is_unpublished: false).where('title LIKE ?', "%#{content}%")
         tags = Tag.where('name LIKE ?', "%#{content}%")
-        tag_results = tags.flat_map { |tag| tag.novels.where(is_unpublished: false, is_deleted: false) }.sort_by(&:created_at).reverse
+        tag_results += tags.flat_map { |tag| tag.novels.where(is_unpublished: false, is_deleted: false) }.sort_by(&:created_at).reverse
       end
 
       # novelのタイトルの検索結果とtagの検索結果のハッシュを結合して、作成日が新しい順、重複なしで返す

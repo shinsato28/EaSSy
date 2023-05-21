@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :users,only: [:index, :show, :edit, :update] do
       get "novels_index", on: :member
     end
-    resources :novels,only: [:edit, :update] do
+    resources :novels,only: [:show, :edit, :update] do
       resources :novel_comments,only: [:index, :edit, :update, :destroy]
     end
   end
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
-      
+
       patch 'withdraw', on: :collection
       get 'unsubscribe', on: :collection
       get "novels_index", on: :member

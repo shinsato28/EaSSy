@@ -7,7 +7,7 @@
           <div class="mb-2">
             <span class="mb-4">投稿者: <%= link_to @novel.user.name, user_path(@novel.user) %></span>
             <span class="ml-5 favorite-btn">
-              <%= render "public/favorites/favorites-btn", novel: @novel %>
+              ♡<%= @novel.favorites.count %>
             </span><br>
           </div>
           <% @novel.tags.each do |tag| %>

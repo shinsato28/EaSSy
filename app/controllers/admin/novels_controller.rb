@@ -1,6 +1,11 @@
 class Admin::NovelsController < ApplicationController
   before_action :authenticate_admin!
 
+  def show
+    @novel = Novel.find(params[:id])
+    @user = @novel.user
+  end
+
   def edit
     @novel = Novel.find(params[:id])
   end

@@ -13,7 +13,7 @@
 
         <!--小説が有効の場合-->
         <% else %>
-          <h5 class="card-title"><%= link_to novel.title, novel_path(novel), style: "color: black;" %></h5>
+          <h5 class="card-title"><%= link_to novel.title, admin_novel_path(novel), style: "color: black;" %></h5>
           <h6 class="card-subtitle mb-2 text-muted">
             <% novel.tags.each do |tag| %>
               <span style="list-style: none;"><%= tag.name %> </span>

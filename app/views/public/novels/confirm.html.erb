@@ -1,7 +1,7 @@
 <div class="container mt-2">
   <div class="row d-flex justify-content-center mb-5">
     <div class="col-10">
-      <%= form_with model: @novel do |f| %>
+      <%= form_with model: @novel, url: novels_path, method: :post do |f| %>
       <h3 class="mb-2"><%= @novel.title %></h3>
       <!--文章の内容を改行ありで表示-->
       <div class="contents-area mb-5"><%=safe_join(@novel.body.split("\n"),tag(:br))%></div>

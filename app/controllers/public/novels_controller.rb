@@ -39,7 +39,7 @@ class Public::NovelsController < ApplicationController
     @novel.user_id = current_user.id
     tag_list = params[:novel][:tag_name].split(/[[:space:]]+/)
     #　戻るボタンを押したときまたは、@novelが保存されなかったらnewアクションを実行
-    if params[:back] || !@novel.save
+    if params[:back]
       render :new and return
       @novel = Novel.new(novel_params)
     # tag_name_no_duplicateメソッドを使用して重複するタグ名があれば戻す。メソッドの詳細は下記
@@ -102,7 +102,7 @@ class Public::NovelsController < ApplicationController
     def is_matching_login_user
       novel = Novel.find(params[:id])
       user = novel.user
-      unless user.id == current_user&.id || !admin_signed_in?
+      unless user.id == current_user&.id
         redirect_to novels_path
       end
     end
