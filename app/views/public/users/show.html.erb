@@ -29,7 +29,13 @@
             <th class="column-table-head">フォロー数</th>
             <td><%= link_to @user.followings.count, user_followings_path(@user) %></td>
             <!--3~6行目の3列目に表示-->
-            <td rowspan="4" class="text-break"><%= safe_join(@user.introduction.split("\n"),tag(:br)) %></td>
+            <td rowspan="4" class="text-break">
+              <% if @user.introduction.nil? %>
+                <span></span>
+              <% else %>
+                <%= safe_join(@user.introduction.split("\n"),tag(:br)) %>
+              <% end %>
+            </td>
           </tr>
           <tr>
             <th class="column-table-head">フォロワー数</th>
