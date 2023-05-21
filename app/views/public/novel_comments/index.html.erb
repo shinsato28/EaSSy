@@ -20,7 +20,7 @@
               <%= link_to comment.user.name, user_path(comment.user) %>
               <span class="ml-5">投稿日: <%= l comment.created_at %></span>
             </p>
-            <p class="card-text"><%= comment.comment %></p>
+            <p class="card-text"><%=safe_join(comment.comment.split("\n"),tag(:br))%></p>
             <!--コメントの投稿者には編集ボタンを表示-->
             <% if comment.user.id == current_user.id %>
               <div class="text-right">
