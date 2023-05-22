@@ -12,3 +12,5 @@ ja:
           attributes:
             email:
               taken: "このメールアドレスは既に使用されています"
+            name:
+              taken: "この名前は既に使用されています。"

@@ -1,7 +1,6 @@
 class Public::NovelsController < ApplicationController
   before_action :authenticate_user!
-  before_action :is_matching_login_user, only: [:edit, :update]
-  before_action :ensure_guest_user, only: [:new]
+  before_action :ensure_guest_user, only: [:new, :edit]
 
   def home
     @recently_novels = Novel.where(is_unpublished: false, is_deleted: false).order(created_at: :desc)
@@ -96,14 +95,6 @@ class Public::NovelsController < ApplicationController
       @user = current_user
       if current_user.name == "guestuser"
         redirect_to user_path(current_user) , notice: 'ゲストユーザーは新規投稿画面へ遷移できません。'
-      end
-    end
-
-    def is_matching_login_user
-      novel = Novel.find(params[:id])
-      user = novel.user
-      unless user.id == current_user&.id
-        redirect_to novels_path
       end
     end
 end

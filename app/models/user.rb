@@ -21,7 +21,7 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
   # ユーザーネームは20文字以下
-  validates :name,length:{maximum:20},presence:true
+  validates :name,length:{maximum:20},presence:true,uniqueness: true
 
 
   # フォローしたときの処理

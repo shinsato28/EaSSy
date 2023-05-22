@@ -26,8 +26,14 @@
               <button class="btn btn-success" type="submit">もっと<%= @novel.user.name %>の投稿を見る</button>
             <% end %>
           <% else %>
+            <% if @novel.user.id == current_user.id %>
+              <%= link_to edit_novel_path(@novel), class: '' do %>
+                <button class="btn btn-success" type="submit">編集する</button>
+              <% end %>
+            <% end %>
+
             <%= link_to novels_index_user_path(@novel.user), class: '' do %>
-              <button class="btn btn-success" type="submit">もっと<%= @novel.user.name %>の投稿を見る</button>
+              <button class="btn btn-primary" type="submit">もっと<%= @novel.user.name %>の投稿を見る</button>
             <% end %>
           <% end %>
         </div>

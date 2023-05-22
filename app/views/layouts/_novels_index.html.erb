@@ -53,6 +53,11 @@
           <% novel.tags.each do |tag| %>
             <span><%= link_to tag.name, searches_search_path(content: tag.name, model:"tag", method: "perfect"), style: "color: gray;" %> </span>
           <% end %>
+          <% unless current_user.name == "guestuser" %>
+            <%= link_to edit_novel_path(novel), class: "ml-3" do %>
+              <i class="fas fa-plus-circle"></i>
+            <% end %>
+          <% end %>
         </h6>
         <div>
           <span class="mr-5 favorite-btn">
