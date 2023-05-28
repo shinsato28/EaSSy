@@ -4,13 +4,19 @@ ja:
       default: "%Y/%m/%d %H:%M:%S"
   errors:
     messages:
-      not_saved: "保存できませんでした"
+      not_saved: "登録に失敗しました"
   activerecord:
     errors:
       models:
         user:
           attributes:
             email:
-              taken: "このメールアドレスは既に使用されています"
+              taken: "このメールアドレスは既に使用されています。"
+              blank: "メールアドレスを入力してください。"
             name:
               taken: "この名前は既に使用されています。"
+              blank: "名前を入力してください。"
+            password:
+              blank: "パスワードを入力してください。"
+            password_confirmation:
+              confirmation: "確認用パスワードが一致しません。"
