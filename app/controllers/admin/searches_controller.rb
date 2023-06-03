@@ -1,4 +1,6 @@
 class Admin::SearchesController < ApplicationController
+  before_action :authenticate_admin!
+
   def search
     # Tagモデルに記載したsearch_novels_forを使った検索処理
     @model = params[:model]
