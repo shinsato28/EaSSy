@@ -44,13 +44,13 @@ class Novel < ApplicationRecord
       self.all
     else
       # eachで使う変数の初期化
-      novel_results = self.where(is_deleted: false, is_unpublished: false).where('title LIKE ?', "%#{contents[0]}%")
+      novel_results = self.where('title LIKE ?', "%#{contents[0]}%")
       tags = Tag.where('name LIKE ?', "%#{contents[0]}%")
       tag_results = tags.flat_map { |tag| tag.novels.where(is_unpublished: false, is_deleted: false) }.sort_by(&:created_at).reverse
 
       # 検索欄に入力された複数のワードをeachで取り出し、結果に入れる
       contents[1..-1].each do |content|
-        novel_results += self.where(is_deleted: false, is_unpublished: false).where('title LIKE ?', "%#{content}%")
+        novel_results += self.where('title LIKE ?', "%#{content}%")
         tags = Tag.where('name LIKE ?', "%#{content}%")
         tag_results += tags.flat_map { |tag| tag.novels.where(is_unpublished: false, is_deleted: false) }.sort_by(&:created_at).reverse
       end

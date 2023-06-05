@@ -20,13 +20,13 @@ class Public::SearchesController < ApplicationController
       keywords = params[:content].split(/[[:space:]]+/)
       # 新着順、いいね順にnovelを並び替えられるようにする
       if params[:most_favorite]
-        @records = Novel.search_by_keywords(keywords).sort_by { |novel| -novel.favorites.count }
+        @records = Novel.where(is_deleted: false, is_unpublished: false).search_by_keywords(keywords).sort_by { |novel| -novel.favorites.count }
         @records = Kaminari.paginate_array(@records).page(params[:page])
       elsif params[:latest]
-        @records = Novel.search_by_keywords(keywords).sort_by(&:created_at).reverse
+        @records = Novel.where(is_deleted: false, is_unpublished: false).search_by_keywords(keywords).sort_by(&:created_at).reverse
         @records = Kaminari.paginate_array(@records).page(params[:page])
       else
-        @records = Novel.search_by_keywords(keywords)
+        @records = Novel.where(is_deleted: false, is_unpublished: false).search_by_keywords(keywords)
         @records = Kaminari.paginate_array(@records).page(params[:page])
       end
     end

@@ -4,7 +4,7 @@
       <div class="card-body">
         <!--小説が削除済みの場合-->
         <% if novel.is_deleted == true %>
-          <h5 class="card-title text-danger"><strong>管理者によって削除済み</strong></h5>
+          <h5 class="card-title text-danger"><strong><%= link_to novel.title, admin_novel_path(novel), style: "color: red;" %></strong></h5>
           <div class="text-right">
             <%= link_to edit_admin_novel_path(novel) do %>
               <button class="btn btn-success" type="submit">編集する</button>

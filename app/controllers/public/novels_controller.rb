@@ -21,6 +21,13 @@ class Public::NovelsController < ApplicationController
   def show
     @novel = Novel.find(params[:id])
     @user = @novel.user
+    if @novel.is_unpublished == true && @user.id != current_user.id
+      flash[:notice]="非公開中です。"
+      redirect_to novels_path
+    elsif @novel.is_deleted == true
+      flash[:notice]="管理者によって削除されています。"
+      redirect_to novels_path
+    end
   end
 
   def new

@@ -9,6 +9,7 @@
             <th>id</th>
             <th>名前</th>
             <th>投稿数</th>
+            <th>削除された投稿数</th>
             <th>メールアドレス</th>
             <th>ステータス</th>
           </tr>
@@ -20,6 +21,7 @@
               <td><%= user.id %></td>
               <td><%= link_to user.name, admin_user_path(user) %></td>
               <td><%= link_to user.novels.count, novels_index_admin_user_path(user) %></td>
+              <td class="text-danger"><%= user.novels.where(is_deleted: true).count %></td>
               <td><%= user.email %></td>
               <!--ユーザーのステータスを表示-->
               <% if user.is_deleted == false %>
