@@ -5,6 +5,7 @@ class Public::NovelsController < ApplicationController
   def home
     @recently_novels = Novel.where(is_unpublished: false, is_deleted: false).order(created_at: :desc)
     @most_favorite_novels = Novel.where(is_unpublished: false, is_deleted: false).most_favorite.order("favorites_count DESC").select("novels.*")
+    @random_novels = Novel.where(is_unpublished: false, is_deleted: false).shuffle
   end
 
   def index
