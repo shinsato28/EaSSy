@@ -6,6 +6,10 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @novels = @user.novels.where(is_deleted: false)
+    if @user.is_deleted == true
+      flash[:notice]="退会したユーザーです。"
+      redirect_to novels_path
+    end
   end
 
   def novels_index
