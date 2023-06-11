@@ -12,7 +12,7 @@ class Public::SearchesController < ApplicationController
       @records = Kaminari.paginate_array(@records).page(params[:page])
     # ユーザー検索の場合
     elsif @model == 'user'
-      @records = User.search_for(@content)
+      @records = User.where(is_deleted: false).search_for(@content)
       @records = Kaminari.paginate_array(@records).page(params[:page])
     # novel検索の場合
     else

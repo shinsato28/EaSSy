@@ -48,7 +48,7 @@ class User < ApplicationRecord
 
   # ユーザー検索機能
   def self.search_for(content)
-    User.where(is_deleted: false).where('name LIKE ?', '%' + content + '%').distinct
+    User.where('name LIKE ?', '%' + content + '%').distinct
   end
 
   private
