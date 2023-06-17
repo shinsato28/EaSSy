@@ -22,6 +22,7 @@ class Public::NovelsController < ApplicationController
   def show
     @novel = Novel.find(params[:id])
     @user = @novel.user
+    # 小説が非公開、削除済みなら小説一覧に遷移
     if @novel.is_unpublished == true && @user.id != current_user.id
       flash[:notice]="非公開中です。"
       redirect_to novels_path
